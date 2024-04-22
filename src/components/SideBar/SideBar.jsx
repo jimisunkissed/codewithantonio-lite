@@ -10,11 +10,14 @@ import {
   MenuList,
   MenuItem,
   Spacer,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import {
-  LuCompass,
+  LuBookDown,
+  LuBookPlus,
   LuPencilRuler,
+  LuPencil,
   LuCode,
   LuTrophy,
   LuMail,
@@ -31,12 +34,21 @@ function SideBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const page = [
-    { text: "Browse", path: "/", icon: LuCompass },
-    { text: "Workshops", path: "/workshops", icon: LuPencilRuler },
+  const sect1 = [
+    { text: "Course", path: "/", icon: LuPencilRuler },
+    { text: "Digital Download", path: "/workshops", icon: LuBookDown },
     { text: "Problems", path: "/upgrade", icon: LuCode },
     { text: "Leaderboard", path: "/leaderboard", icon: LuTrophy },
     { text: "Newsletter", path: "/newsletter", icon: LuMail },
+  ];
+
+  const sect2 = [
+    { text: "Create Course", path: "create/course", icon: LuPencil },
+    {
+      text: "Create Digital Download",
+      path: "/create/digitaldownlaod",
+      icon: LuBookPlus,
+    },
   ];
 
   const menu = [
@@ -54,13 +66,13 @@ function SideBar() {
       borderRightWidth="1px"
       borderColor="gray.100"
       spacing={0}
-      overflow='auto'
+      overflow="auto"
       css={{
         "&::-webkit-scrollbar": {
           width: "5px", // Width of the scrollbar
         },
         "&::-webkit-scrollbar-track": {
-          background: 'transparent', // Color of the track
+          background: "transparent", // Color of the track
         },
         "&::-webkit-scrollbar-thumb": {
           background: midgray, // Color of the thumb
@@ -69,7 +81,10 @@ function SideBar() {
       }}
     >
       <VStack flexGrow={1} w="100%" bg="white" spacing="6.5px" p="12px">
-        {page.map((page, index) => (
+        <Text w="100%" fontSize="16px" fontWeight="500" pl="12px">
+          Products
+        </Text>
+        {sect1.map((page, index) => (
           <HStack
             key={index}
             h="48px"
@@ -106,8 +121,48 @@ function SideBar() {
             ) : undefined}
           </HStack>
         ))}
-        <Spacer />
-        <VStack
+        <Text w="100%" fontSize="16px" fontWeight="500" pl="12px">
+          Creator
+        </Text>
+        {sect2.map((page, index) => (
+          <HStack
+            key={index}
+            h="48px"
+            w="100%"
+            bg={location.pathname === page.path ? lightblue1 : "white"}
+            borderRadius="8px"
+            color={location.pathname === page.path ? "black" : darkgray}
+            p="12px"
+            _hover={{ bg: lightblue1, cursor: "pointer" }}
+            onClick={() => navigate(page.path)}
+            transition="background-color 0.2s ease, color 0.2s ease"
+          >
+            <Icon
+              as={page.icon}
+              fontSize="20px"
+              //   transform= {`rotate(${degree}deg)`}
+              //   transition="transform 0.2s ease"
+            />
+            <Box fontSize="14px">{page.text}</Box>
+            <Spacer />
+            {page.text === "Workshops" ? (
+              <Center
+                h="20px"
+                w="45px"
+                bg={lightblue2}
+                borderRadius="6px"
+                fontSize="12px"
+                fontWeight="600"
+                color={darkblue2}
+                pt="1px"
+              >
+                New
+              </Center>
+            ) : undefined}
+          </HStack>
+        ))}
+        {/* Upgrade Card */}
+        {/* <VStack
           h="155px"
           w="100%"
           borderRadius="8px"
@@ -137,7 +192,7 @@ function SideBar() {
           >
             Upgrade
           </Center>
-        </VStack>
+        </VStack> */}
       </VStack>
       <Flex
         h="72px"
@@ -164,12 +219,7 @@ function SideBar() {
           </MenuButton>
           <MenuList p="3px">
             {menu.map((info, index) => (
-              <MenuItem
-                key={index}
-                h="30px"
-                borderRadius="5px"
-                p={0}
-              >
+              <MenuItem key={index} h="30px" borderRadius="5px" p={0}>
                 <HStack
                   h="100%"
                   w="100%"
