@@ -1,21 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import Browse from "../pages/Browse/Browse";
-import Workshops from "../pages/Workshops/Workshops";
+import Course from "../pages/Course/Course";
+import DigitalDownloads from "../pages/DigitalDownloads/DigitalDownloads";
 import Projects from '../pages/Projects/Project'
 import Problems from "../pages/Upgrade/Upgrade";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import Newsletter from "../pages/Newsletter/Newsletter";
+import CreateCourse from "../pages/CreateCourse/CreateCourse"
+import CreateDigitalDownload from '../pages/CreateDigitalDownload/CreateDigitalDownload'
 import Upgrade from "../pages/Upgrade/Upgrade"
 
 function MainRouter() {
   const allRouter = [
     {
       path: "/",
-      element: <Browse />,
+      element: <Course />,
     },
     {
-      path: "/workshops",
-      element: <Workshops />,
+      path: "/digitaldownloads",
+      element: <DigitalDownloads/>,
     },
     {
       path: "/projects/",
@@ -32,6 +34,14 @@ function MainRouter() {
     {
       path: "/newsletter",
       element: <Newsletter />,
+    },
+    {
+      path: "/create/course",
+      element: <CreateCourse />,
+    },
+    {
+      path: "/create/digitaldownload",
+      element: <CreateDigitalDownload />,
     },
     {
       path:'/upgrade',

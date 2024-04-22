@@ -35,8 +35,8 @@ function SideBar() {
   const location = useLocation();
 
   const sect1 = [
-    { text: "Course", path: "/", icon: LuPencilRuler },
-    { text: "Digital Download", path: "/workshops", icon: LuBookDown },
+    { text: "Courses", path: "/", icon: LuPencilRuler },
+    { text: "Digital Downloads", path: "/digitaldownloads", icon: LuBookDown },
     { text: "Problems", path: "/upgrade", icon: LuCode },
     { text: "Leaderboard", path: "/leaderboard", icon: LuTrophy },
     { text: "Newsletter", path: "/newsletter", icon: LuMail },
@@ -46,7 +46,7 @@ function SideBar() {
     { text: "Create Course", path: "create/course", icon: LuPencil },
     {
       text: "Create Digital Download",
-      path: "/create/digitaldownlaod",
+      path: "/create/digitaldownload",
       icon: LuBookPlus,
     },
   ];

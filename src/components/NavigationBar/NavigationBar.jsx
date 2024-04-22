@@ -11,21 +11,23 @@ import {
   Image,
   Input,
   Spacer,
+  Text,
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import {
-  LuLogIn,
   LuSearch,
   LuAlignJustify,
-  LuCompass,
   LuPencilRuler,
   LuCode,
   LuTrophy,
   LuMail,
   LuX,
+  LuBookDown,
+  LuBookPlus,
+  LuPencil,
 } from "react-icons/lu";
-import LoginButton from '../LoginButton/LoginButton'
+import LoginButton from "../LoginButton/LoginButton";
 import logo from "../../assets/cwaLogo.jpeg";
 import Color from "../../Color";
 
@@ -43,12 +45,22 @@ function NavigationBar() {
 
   // Drawer
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const page = [
-    { text: "Browse", path: "/", icon: LuCompass },
-    { text: "Workshops", path: "/workshops", icon: LuPencilRuler },
+
+  const sect1 = [
+    { text: "Courses", path: "/", icon: LuPencilRuler },
+    { text: "Digital Downloads", path: "/digitaldownloads", icon: LuBookDown },
     { text: "Problems", path: "/upgrade", icon: LuCode },
     { text: "Leaderboard", path: "/leaderboard", icon: LuTrophy },
     { text: "Newsletter", path: "/newsletter", icon: LuMail },
+  ];
+
+  const sect2 = [
+    { text: "Create Course", path: "create/course", icon: LuPencil },
+    {
+      text: "Create Digital Download",
+      path: "/create/digitaldownload",
+      icon: LuBookPlus,
+    },
   ];
 
   // Navigator
@@ -79,16 +91,24 @@ function NavigationBar() {
         <Icon as={LuAlignJustify} fontSize="20px" />
       </Center>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay backdropFilter="blur(10px)"/>
+        <DrawerOverlay backdropFilter="blur(10px)" />
         <DrawerContent boxShadow="lg">
           <VStack w="100%" align="baseline" spacing="6.5px" p="10px">
-            <HStack h="40px" w="100%" justify="space-between" mb='10px'>
+            <HStack
+              h="40px"
+              w="100%"
+              justify="space-between"
+              m="15px 0px 15px 0px"
+            >
               <HStack
                 h="100%"
                 w="200px"
                 spacing={2}
                 _hover={{ opacity: "75%", cursor: "pointer" }}
-                onClick={() => {navigate(''); onClose()}}
+                onClick={() => {
+                  navigate("");
+                  onClose();
+                }}
                 transition="opacity 0.2s ease"
               >
                 <Box
@@ -125,7 +145,10 @@ function NavigationBar() {
                 <Icon as={LuX} />
               </Center>
             </HStack>
-            {page.map((page, index) => (
+            <Text w="100%" fontSize="16px" fontWeight="500" pl="12px">
+              Products
+            </Text>
+            {sect1.map((page, index) => (
               <HStack
                 key={index}
                 h="48px"
@@ -135,7 +158,53 @@ function NavigationBar() {
                 color={location.pathname === page.path ? "black" : darkgray}
                 p="12px"
                 _hover={{ bg: lightblue1, cursor: "pointer" }}
-                onClick={() => {navigate(page.path); onClose()}}
+                onClick={() => {
+                  navigate(page.path);
+                  onClose();
+                }}
+                transition="background-color 0.2s ease, color 0.2s ease"
+              >
+                <Icon
+                  as={page.icon}
+                  fontSize="20px"
+                  //   transform= {`rotate(${degree}deg)`}
+                  //   transition="transform 0.2s ease"
+                />
+                <Box fontSize="14px">{page.text}</Box>
+                <Spacer />
+                {page.text === "Workshops" ? (
+                  <Center
+                    h="20px"
+                    w="45px"
+                    bg={lightblue2}
+                    borderRadius="6px"
+                    fontSize="12px"
+                    fontWeight="600"
+                    color={darkblue2}
+                    pt="1px"
+                  >
+                    New
+                  </Center>
+                ) : undefined}
+              </HStack>
+            ))}
+            <Text w="100%" fontSize="16px" fontWeight="500" pl="12px">
+              Creator
+            </Text>
+            {sect2.map((page, index) => (
+              <HStack
+                key={index}
+                h="48px"
+                w="100%"
+                bg={location.pathname === page.path ? lightblue1 : "white"}
+                borderRadius="8px"
+                color={location.pathname === page.path ? "black" : darkgray}
+                p="12px"
+                _hover={{ bg: lightblue1, cursor: "pointer" }}
+                onClick={() => {
+                  navigate(page.path);
+                  onClose();
+                }}
                 transition="background-color 0.2s ease, color 0.2s ease"
               >
                 <Icon
